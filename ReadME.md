@@ -14,5 +14,5 @@ We provide a simplified version of our **AMoPO**.
 
 ## Key trainer
 
-Our AMoPO trainer is in [trainer.py](./src/train/amopo/trainer.py).
+Our AMoPO trainer is in [trainer.py](./src/llamafactory/train/amopo/trainer_multi_obj.py).
 
