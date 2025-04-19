@@ -1,0 +1,44 @@
+### model
+model_name_or_path: /mnt/dolphinfs/hdd_pool/docker/user/hadoop-mtai/users/liuqi138/llm/Qwen2.5-0.5B-Instruct
+
+### method
+stage: modpo
+do_train: true
+finetuning_type: full
+lora_target: all
+pref_beta: 0.1
+pref_loss: sigmoid  # choices: [sigmoid (dpo)]
+# deepspeed: examples/deepspeed/ds_z0_config.json
+
+### dataset dpo_en_demo help_steer2_train_format_po2
+dataset: help_steer2_train_format_po2_reward_score
+template: qwen
+cutoff_len: 1024
+max_samples: 10000
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: /mnt/dolphinfs/hdd_pool/docker/user/hadoop-mtai/users/liuqi138/instruction_follow/saves/qwen2.5-0.5B-ins/full/dpo
+logging_steps: 10
+save_steps: 5000
+plot_loss: true
+overwrite_output_dir: true
+report_to: tensorboard
+
+### train
+reward_model_modpo: /mnt/dolphinfs/hdd_pool/docker/user/hadoop-mtai/users/liuqi138/llm/ArmoRM-Llama3-8B-v0.1
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 2
+learning_rate: 5.0e-6
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+
+ddp_timeout: 180000000
+
+### eval
+val_size: 0.1
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 500
