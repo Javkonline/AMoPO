@@ -196,8 +196,6 @@ class CustomMOTrainer(DPOTrainer):
         chosen_all_valid_length = [new_valid_length[i] for i in range(len(new_valid_length)) if i % 2 == 0]
         rejected_all_valid_length = [new_valid_length[i] for i in range(len(new_valid_length)) if i % 2 != 0]
 
-
-        # 为了系数矩阵
         new_per_token_logits = per_token_logits.split(batch_size, dim=0)
         new_loss_mask = loss_mask.split(batch_size, dim=0)
 
